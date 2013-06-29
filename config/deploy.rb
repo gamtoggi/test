@@ -1,22 +1,30 @@
-#et :application, "my_test"
+set :application, "my_test"
 #set :repository,  "set your repository location here"
 
 
 default_run_options[:pty] = true  # Must be set for the password prompt
                                   # from git to work
-set :repository, "git@github.com:gamtoggi/my_test.git" # Your clone URL
+set :repository, "git@github.com:gamtoggi/test.git" # Your clone URL
 set :scm, "git"
 set :user, "gamtoggi"  # The server's user for deploys
 set :scm_passphrase, "toggi9292"  # The deploy user's password
 
+set :branch, "master" #You need to tell cap the branch to checkout during deployment:
+set :deploy_via, :remote_cache #In most cases you want to use this option, otherwise each deploy will do a full repository clone every time.
+
+set :deploy_to, "/home/gamtoggi/app"
+
+set :user, "gamtoggi"
+set :scm_username, "gamtoggi"
+set :use_sudo, false
 
 # set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-#role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-#role :app, "your app-server here"                          # This may be the same as your `Web` server
-#role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-#role :db,  "your slave db-server here"
+role :web, "gameway.kr"                          # Your HTTP server, Apache/etc
+role :app, "gameway.kr"                          # This may be the same as your `Web` server
+role :db,  "gameway.kr", :primary => true # This is where Rails migrations will run
+# role :db,  "your slave db-server here"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
